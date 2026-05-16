@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan Wittels - Discografía</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-zinc-950 text-white font-sans antialiased">
+
+    <nav class="fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="{% url 'home' %}" class="text-xl font-black tracking-widest uppercase">A L A N  W I T T E L S</a>
+            <div class="space-x-6 text-sm font-medium tracking-wide uppercase">
+                <a href="{% url 'home' %}" class="hover:text-purple-400 transition">Inicio</a>
+                <a href="{% url 'discografia' %}" class="text-purple-400 font-bold">Discografía</a>
+                <a href="{% url 'tours' %}" class="hover:text-purple-400 transition">Tours</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 min-h-screen pb-24">
+        <div class="max-w-6xl mx-auto px-4">
+            
+            <div class="mb-16 border-b border-zinc-800 pb-6 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-black tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
+                    Discografía
+                </h1>
+                <p class="text-purple-500 tracking-widest uppercase text-sm mt-2 font-medium">Álbumes y Lanzamientos Oficiales</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                {% for album in albumes %}
+                <div class="bg-zinc-900/30 border border-zinc-800/80 p-6 rounded-2xl flex flex-col sm:flex-row gap-6 hover:border-purple-500/30 transition-all duration-300 group">
+                    
+                    <div class="w-full sm:w-48 h-48 flex-shrink-0 bg-zinc-800 rounded-xl overflow-hidden shadow-xl relative">
+                        {% if album.portada %}
+                            <img src="{{ album.portada.url }}" alt="{{ album.titulo }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        {% else %}
+                            <div class="w-full h-full flex items-center justify-center text-zinc-600 bg-zinc-900">
+                                <span class="text-xs italic">Sin portada</span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold tracking-widest uppercase text-purple-400">{{ album.año_lanzamiento }}</span>
+                            <h2 class="text-2xl font-black tracking-tight text-white mt-1 group-hover:text-purple-400 transition-colors">
+                                {{ album.titulo }}
+                            </h2>
+                            
+                            <div class="mt-4 space-y-1.5">
+                                <p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2">Tracks:</p>
+                                {% for cancion in album.canciones.all %}
+                                <div class="flex items-center justify-between text-sm text-zinc-400 bg-zinc-950/40 px-3 py-1 rounded border border-zinc-900">
+                                    <span class="truncate pr-4">{{ cancion.titulo }}</span>
+                                    {% if cancion.duracion %}
+                                        <span class="text-xs text-zinc-600 font-mono">{{ cancion.duracion }}</span>
+                                    {% endif %}
+                                </div>
+                                {% empty %}
+                                <p class="text-xs text-zinc-600 italic">No hay canciones agregadas aún.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% empty %}
+                <div class="col-span-full text-center py-16 bg-zinc-900/20 rounded-xl border border-zinc-900/60">
+                    <p class="text-zinc-500 italic">Aún no se han registrado álbumes en el panel de control.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

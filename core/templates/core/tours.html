@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan Wittels - Tour Oficial</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-zinc-950 text-white font-sans antialiased">
+
+    <nav class="fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="{% url 'home' %}" class="text-xl font-black tracking-widest uppercase">A L A N  W I T T E L S</a>
+            <div class="space-x-6 text-sm font-medium tracking-wide uppercase">
+                <a href="{% url 'home' %}" class="hover:text-purple-400 transition">Inicio</a>
+                <a href="{% url 'tours' %}" class="text-purple-400 font-bold">Tours</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 min-h-screen pb-24">
+        <div class="max-w-5xl mx-auto px-4">
+            
+            <div class="mb-12 border-b border-zinc-800 pb-6 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-black tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
+                    Próximas Fechas
+                </h1>
+                <p class="text-purple-500 tracking-widest uppercase text-sm mt-2 font-medium">Alan Wittels On Tour 2026</p>
+            </div>
+
+            <div class="space-y-4">
+                {% for concierto in conciertos %}
+                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-zinc-900/40 rounded-xl border border-zinc-800 hover:border-purple-500/40 transition-all duration-300 gap-4 group">
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="bg-purple-600/10 text-purple-400 font-black text-xl px-4 py-2 rounded-lg border border-purple-500/20 text-center min-w-[100px]">
+                            {{ concierto.fecha|date:"d M" }}
+                            <span class="block text-xs font-medium text-zinc-500 uppercase mt-0.5">{{ concierto.fecha|date:"Y" }}</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">
+                                {{ concierto.nombre_gira }}
+                            </h3>
+                            <p class="text-sm text-zinc-400">{{ concierto.lugar }}</p>
+                        </div>
+                    </div>
+
+                    <div class="text-zinc-300 font-medium md:text-right">
+                        {{ concierto.ciudad }}
+                    </div>
+
+                    <div>
+                        {% if concierto.enlace_tickets %}
+                        <a href="{{ concierto.enlace_tickets }}" target="_blank" 
+                           class="inline-block w-full md:w-auto text-center bg-white text-black font-semibold px-6 py-2.5 rounded-full hover:bg-purple-500 hover:text-white transition-all duration-300 text-sm tracking-wide shadow-lg">
+                            Comprar Tickets
+                        </a>
+                        {% else %}
+                        <span class="inline-block w-full md:w-auto text-center bg-zinc-800 text-zinc-500 font-medium px-6 py-2.5 rounded-full text-sm tracking-wide cursor-not-allowed">
+                            Agotado
+                        </span>
+                        {% endif %}
+                    </div>
+
+                </div>
+                {% empty %}
+                <div class="text-center py-16 bg-zinc-900/20 rounded-xl border border-zinc-900/60">
+                    <p class="text-zinc-500 italic">No hay fechas programadas por el momento. Quédate atento a las redes.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+.player-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.play-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background-color: #1DB954; /* Verde estilo Spotify */
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s, background-color 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+  background-color: #1ed760;
+}
+
+.play-btn:active {
+  transform: scale(0.95);
+}
+
+/* Clase opcional para cuando esté en pausa (si quieres cambiar el color) */
+.paused {
+  background-color: #ff4757;
+}
