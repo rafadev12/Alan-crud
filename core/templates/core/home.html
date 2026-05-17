@@ -9,42 +9,47 @@
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-purple-600 selection:text-white">
+<body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-yellow-600 selection:text-white">
 
     <nav class="fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="#" class="text-xl font-black tracking-widest text-purple-500 uppercase">A L A N W I T T E L S</a>
+            <a href="#" class="text-xl font-black tracking-widest text-yellow-500 uppercase">A L A N W I T T E L S</a>
             <div class="space-x-6 text-sm font-medium tracking-wide uppercase">
-                <a href="{% url 'discografia' %}" class="hover:text-purple-400 transition">Discografía</a>
-                <a href="{% url 'tours' %}" class="hover:text-purple-400 transition">Tours</a>
-            <div class="player-container">
-                    <button id="playPauseBtn" class="play-btn">
-                        <span id="icon">▶</span>
-                    </button>
+                <a href="{% url 'discografia' %}" class="hover:text-yellow-400 transition">Discografía</a>
+                <a href="{% url 'tours' %}" class="hover:text-yellow-400 transition">Tours</a>
+            </div>
         </div>
 
-        <audio id="myAudio" src="{% static 'audios/Alan Wittels - Mantra(m4a_128k).m4a' %}" autoplay muted></audio>
+        <audio id="bg-audio" loop src="{% static 'audios/Alan Wittels - Mantra(m4a_128k).m4a' %}"></audio>
+        
+            <!-- Botón de Control de Audio Flotante -->
+        <button id="audio-control" class="fixed bottom-8 right-8 z-[110] flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-full hover:bg-white/20 transition-all duration-300 group">
+            <div class="flex items-end space-x-[3px] h-4">
+                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
+                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
+                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
+                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
             </div>
-
-    
+        </button>
     </nav>
 
 
 <header class="h-screen flex flex-col items-center justify-center bg-zinc-950 relative overflow-hidden">
         
-        <img src="{% static 'images/alan.jpg' %}"
+        <img src="{% static 'images/alan-porta.jpg' %}"
             alt="Alan Wittels Portada" 
             class="absolute inset-0 w-full h-full object-cover object-center opacity-40 z-0">
         
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/40 to-zinc-950 z-0"></div>
         
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(147,51,234,0.15)_0,transparent_100%)] z-0"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba()_0,transparent_100%)] z-0"></div>
         
         <h1 class="text-7xl md:text-9xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-zinc-600 uppercase z-10 text-center select-none">
             Alan Wittels
         </h1>
 
         <p class="mt-4 text-zinc-400 tracking-widest uppercase text-sm z-10 font-medium">Del Caribe</p>
+        <span class="mt-4 text-zinc-400 tracking-widest uppercase text-sm z-10 font-medium">+58</span>
         
     
     </header>
@@ -57,16 +62,16 @@
                     <p class="text-zinc-400 leading-relaxed text-lg whitespace-pre-line">{{ biografia.texto_principal }}</p>
                     <div class="flex space-x-4 mt-6">
                         {% if biografia.link_instagram %}
-                            <a href="{{ biografia.link_instagram }}" target="_blank" class="text-zinc-400 hover:text-purple-400 transition font-medium">Instagram</a>
+                            <a href="{{ biografia.link_instagram }}" target="_blank" class="text-zinc-400 hover:text-yellow-400 transition font-medium">Instagram</a>
                         {% endif %}
                         {% if biografia.link_youtube %}
-                            <a href="{{ biografia.link_youtube }}" target="_blank" class="text-zinc-400 hover:text-purple-400 transition font-medium">YouTube</a>
+                            <a href="{{ biografia.link_youtube }}" target="_blank" class="text-zinc-400 hover:text-yellow-400 transition font-medium">YouTube</a>
                         {% endif %}
                     </div>
                 </div>
                 {% if biografia.imagen_perfil %}
                     <div class="relative group">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                         <img src="{{ biografia.imagen_perfil.url }}" alt="Alan Wittels" class="relative rounded-lg object-cover w-full h-96 filter grayscale contrast-125">
                     </div>
                 {% endif %}
@@ -81,13 +86,13 @@
             <h2 class="text-3xl font-extrabold tracking-tight mb-12 uppercase border-b border-zinc-800 pb-4">Discografía</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {% for album in albumes %}
-                    <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800/50 hover:border-purple-500/50 transition group flex flex-col justify-between">
+                    <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800/50 hover:border-yellow-500/50 transition group flex flex-col justify-between">
                         <div>
                             {% if album.portada %}
                                 <img src="{{ album.portada.url }}" alt="{{ album.titulo }}" class="w-full aspect-square object-cover rounded-lg mb-4">
                             {% endif %}
-                            <span class="text-xs font-bold text-purple-400 tracking-widest uppercase block mb-1">{{ album.get_tipo_display }}</span>
-                            <h3 class="font-bold text-lg text-white group-hover:text-purple-400 transition">{{ album.titulo }}</h3>
+                            <span class="text-xs font-bold text-yellow-400 tracking-widest uppercase block mb-1">{{ album.get_tipo_display }}</span>
+                            <h3 class="font-bold text-lg text-white group-hover:text-yellow-400 transition">{{ album.titulo }}</h3>
                             
                             <ul class="mt-3 space-y-1 text-xs text-zinc-500">
                                 {% for cancion in album.canciones.all %}
@@ -98,7 +103,7 @@
                             </ul>
                         </div>
                         {% if album.link_streaming %}
-                            <a href="{{ album.link_streaming }}" target="_blank" class="mt-4 block w-full text-center bg-zinc-800 hover:bg-purple-600 text-white text-xs font-bold py-2 rounded transition">Escuchar</a>
+                            <a href="{{ album.link_streaming }}" target="_blank" class="mt-4 block w-full text-center bg-zinc-800 hover:bg-yellow-600 text-white text-xs font-bold py-2 rounded transition">Escuchar</a>
                         {% endif %}
                     </div>
                 {% empty %}
@@ -114,12 +119,12 @@
             {% for concierto in conciertos %}
                 <div class="bg-zinc-900 border border-zinc-800/80 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 hover:bg-zinc-900/80 transition">
                     <div>
-                        <span class="text-sm font-semibold text-purple-400 block mb-1">{{ concierto.fecha|date:"d M, Y" }} - {{ concierto.fecha|time:"H:i" }}</span>
+                        <span class="text-sm font-semibold text-yellow-400 block mb-1">{{ concierto.fecha|date:"d M, Y" }} - {{ concierto.fecha|time:"H:i" }}</span>
                         <h3 class="text-xl font-bold text-white">{{ concierto.ciudad }}</h3>
                         <p class="text-sm text-zinc-400">{{ concierto.lugar }}</p>
                     </div>
                     {% if concierto.link_tickets %}
-                        <a href="{{ concierto.link_tickets }}" target="_blank" class="bg-white hover:bg-purple-600 text-black hover:text-white px-6 py-2.5 rounded-full font-bold text-sm tracking-wide transition text-center">Tickets</a>
+                        <a href="{{ concierto.link_tickets }}" target="_blank" class="bg-white hover:bg-yellow-600 text-black hover:text-white px-6 py-2.5 rounded-full font-bold text-sm tracking-wide transition text-center">Tickets</a>
                     {% else %}
                         <span class="text-zinc-500 text-sm font-medium italic border border-zinc-800 px-4 py-2 rounded-full">Agotado / Pronto</span>
                     {% endif %}
@@ -127,6 +132,35 @@
             {% empty %}
                 <p class="text-zinc-500 italic text-center py-8">No hay conciertos programados por el momento.</p>
             {% endfor %}
+        </div>
+    </section>
+
+<section id="galeria" class="py-24 bg-zinc-950 border-t border-zinc-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight uppercase">Galería <span class="text-yellow-500"></span></h2>
+                    <p class="text-zinc-500 uppercase tracking-widest text-xs mt-2">Momentos & Clips Exclusivos</p>
+                </div>
+                <a href="{% url 'galeria' %}" class="text-sm font-bold text-yellow-400 hover:text-white transition uppercase tracking-widest">Ver Completa →</a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {% for item in items_galeria %}
+                <div class="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800/50 aspect-square">
+                    {% if item.tipo == 'foto' %}
+                        <img src="{{ item.imagen.url }}" alt="{{ item.titulo }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    {% else %}
+                        <iframe class="w-full h-full" src="{{ item.url_video }}" frameborder="0" allowfullscreen></iframe>
+                    {% endif %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                        <h3 class="text-lg font-bold text-white">{{ item.titulo }}</h3>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-zinc-600 italic col-span-full text-center">No hay archivos multimedia cargados.</p>
+                {% endfor %}
+            </div>
         </div>
     </section>
 
@@ -148,7 +182,7 @@
                             </div>
                         </div>
                         <div class="p-4 pt-0 flex items-center justify-between">
-                            <span class="text-xl font-black text-purple-400">${{ producto.precio }}</span>
+                            <span class="text-xl font-black text-yellow-400">${{ producto.precio }}</span>
                             {% if producto.stock > 0 %}
                                 <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded font-medium">Stock: {{ producto.stock }}</span>
                             {% else %}
@@ -163,35 +197,129 @@
         </div>
     </section>
 
+    <section id="booking" class="py-24 bg-zinc-950 border-t border-zinc-900 scroll-mt-16">
+        <div class="max-w-3xl mx-auto px-4">
+            
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight uppercase">
+                    Booking & <span class="text-purple-500">Contrataciones</span>
+                </h2>
+                <p class="text-zinc-500 uppercase tracking-widest text-xs mt-2">¿Quieres a Alan Wittels en tu evento o marca? Déjanos tu propuesta</p>
+            </div>
+
+            {% if msg_exito %}
+            <div class="mb-8 p-4 bg-purple-500/10 border border-purple-500/40 rounded-xl text-center text-purple-400 font-medium text-sm animate-pulse">
+                ¡Tu propuesta ha sido enviada con éxito! El equipo se pondrá en contacto pronto.
+            </div>
+            {% endif %}
+
+            <form method="POST" action="#booking" class="space-y-6 bg-zinc-900/30 border border-zinc-900 p-8 rounded-2xl shadow-xl">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Nombre completo *</label>
+                        <input type="text" name="nombre" required 
+                               class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500 transition duration-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Empresa / Promotora</label>
+                        <input type="text" name="empresa" 
+                               class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500 transition duration-300">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Correo Electrónico *</label>
+                        <input type="email" name="correo" required 
+                               class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500 transition duration-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Teléfono de contacto</label>
+                        <input type="text" name="telefono" 
+                               class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500 transition duration-300">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Detalles de la propuesta (Lugar, Fecha tentativa, Tipo de evento) *</label>
+                    <textarea name="mensaje" rows="5" required 
+                              class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500 transition duration-300 resize-none"></textarea>
+                </div>
+
+                <button type="submit" 
+                        class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-xl shadow-lg transition duration-300 transform active:scale-[0.99] cursor-pointer">
+                    Enviar Solicitud
+                </button>
+            </form>
+
+        </div>
+    </section>
+
     <footer class="border-t border-zinc-900 py-8 text-center text-xs text-zinc-600">
         <p>&copy; 2026 Alan Wittels. .</p>
     </footer>
 
 <script>
-        const audio = document.getElementById('myAudio');
-    const btn = document.getElementById('playPauseBtn');
-    const icon = document.getElementById('icon');
+<!-- audio -->
+    window.addEventListener('DOMContentLoaded', () => {
+    const bgAudio = document.getElementById('bg-audio');
+    
+    // Función para iniciar el audio
+    const startAudio = () => {
+        bgAudio.play().then(() => {
+            console.log("Ambiente activado: Alan en la casa");
+            // Una vez que suena, removemos el evento para que no se reinicie
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('scroll', startAudio);
+        }).catch(error => {
+            console.log("Esperando interacción del usuario para el audio...");
+        });
+    };
 
-    btn.addEventListener('click', () => {
-    if (audio.paused) {
-        // Si está pausado, reproducir
-        audio.play();
-        icon.textContent = '⏸'; // Icono de pausa
-        btn.classList.add('paused');
-    } else {
-        // Si está reproduciendo, pausar
-        audio.pause();
-        icon.textContent = '▶'; // Icono de play
-        btn.classList.remove('paused');
-    }
+    // Escuchamos el primer click o el primer scroll para disparar la música
+    document.addEventListener('click', startAudio);
+    document.addEventListener('scroll', startAudio);
+});
+
+
+
+const startAudio = () => {
+    bgAudio.volume = 0; // Empezamos en silencio
+    bgAudio.play().then(() => {
+        // Subimos el volumen gradualmente cada 200ms
+        let vol = 0;
+        const interval = setInterval(() => {
+            if (vol < 0.5) { // Lo dejamos al 50% para que no aturda
+                vol += 0.05;
+                bgAudio.volume = vol;
+            } else {
+                clearInterval(interval);
+            }
+        }, 200);
+
+        document.removeEventListener('click', startAudio);
     });
-
-    // Opcional: Resetear el botón cuando la música termine
-    audio.onended = () => {
-    icon.textContent = '▶';
-    btn.classList.remove('paused');
 };
-  </script>
+
+const audioControl = document.getElementById('audio-control');
+const bgAudio = document.getElementById('bg-audio');
+
+audioControl.addEventListener('click', () => {
+    if (bgAudio.paused) {
+        bgAudio.play();
+        audioControl.classList.add('playing');
+    } else {
+        bgAudio.pause();
+        audioControl.classList.remove('playing');
+    }
+});
+
+// Asegurar que si el audio empieza por el script de "autoplay" previo, el botón se anime
+bgAudio.onplay = () => audioControl.classList.add('playing');
+bgAudio.onpause = () => audioControl.classList.remove('playing');
+</script>
 
 </body>
 </html>
