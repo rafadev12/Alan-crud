@@ -21,10 +21,33 @@
                     <button id="playPauseBtn" class="play-btn">
                         <span id="icon">▶</span>
                     </button>
-        </div>
+        <!-- El elemento de audio oculto -->
+<audio id="musica-fondo" loop>
+    <source src="C:\Users\Admin\Desktop\Alan-crud\core\static\audios\alanwittel-mantra.m4a" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
 
-        <audio id="myAudio" src="{% static 'audios/Alan Wittels - Mantra(m4a_128k).m4a' %}" autoplay muted></audio>
-            </div>
+<!-- El botón de control -->
+<button id="btn-reproducir" class="tu-clase-css">
+    🎵 Reproducir
+</button>
+
+<script>
+    // Seleccionamos el audio y el botón
+    const musica = document.getElementById('musica-fondo');
+    const boton = document.getElementById('btn-reproducir');
+
+    // Escuchamos el click en el botón
+    boton.addEventListener('click', () => {
+        if (musica.paused) {
+            musica.play();
+            boton.textContent = '⏸️ Pausar'; // Cambia el texto del botón
+        } else {
+            musica.pause();
+            boton.textContent = '🎵 Reanudar'; // Cambia el texto de vuelta
+        }
+    });
+</script>
 
     
     </nav>
