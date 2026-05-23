@@ -146,7 +146,7 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {% for item in items_list %}
+                {% for item in items_galeria %}
                 <div class="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800/50 aspect-square">
                     {% if item.tipo == 'foto' %}
                         <img src="{{ item.imagen.url }}" alt="{{ item.titulo }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
