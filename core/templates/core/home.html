@@ -11,26 +11,34 @@
 </head>
 <body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-yellow-600 selection:text-white">
 
-    <nav class="fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="#" class="text-xl font-black tracking-widest text-yellow-500 uppercase">A L A N W I T T E L S</a>
-            <div class="space-x-6 text-sm font-medium tracking-wide uppercase">
-                <a href="{% url 'discografia' %}" class="hover:text-yellow-400 transition">Discografía</a>
-                <a href="{% url 'tours' %}" class="hover:text-yellow-400 transition">Tours</a>
+<nav class="fixed w-full top-0 left-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-900">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between relative z-50">
+            <a href="{% url 'home' %}" class="text-sm font-black tracking-[0.2em] uppercase text-white">
+                ALAN WITTELS
+            </a>
+
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none p-2" aria-label="Abrir menú">
+                <svg id="menu-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <div class="hidden md:flex space-x-8 text-xs font-semibold tracking-widest uppercase">
+                <a href="{% url 'discografia' %}" class="hover:text-purple-400 transition duration-300">Discografía</a>
+                <a href="{% url 'tours' %}" class="hover:text-purple-400 transition duration-300">Tours</a>
+                <a href="{% url 'galeria' %}" class="hover:text-purple-400 transition duration-300">Galería</a>
+                <a href="{% url 'booking' %}" class="hover:text-purple-400 transition duration-300 text-purple-400">Booking</a>
             </div>
         </div>
 
-        <audio id="bg-audio" loop src="{% static '\audios\alanwittel-mantra.m4a' %}"></audio>
-        
-            <!-- Botón de Control de Audio Flotante -->
-        <button id="audio-control" class="fixed bottom-8 right-8 z-[110] flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-full hover:bg-white/20 transition-all duration-300 group">
-            <div class="flex items-end space-x-[3px] h-4">
-                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
-                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
-                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
-                <div class="bar w-[3px] bg-white transition-all duration-300"></div>
+        <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-zinc-950/98 z-40 flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center justify-center space-y-10 w-full uppercase">
+                <a href="{% url 'discografia' %}" class="mobile-link text-lg font-bold tracking-[0.2em] hover:text-purple-400 transition">Discografía</a>
+                <a href="{% url 'tours' %}" class="mobile-link text-lg font-bold tracking-[0.2em] hover:text-purple-400 transition">Tours</a>
+                <a href="{% url 'galeria' %}" class="mobile-link text-lg font-bold tracking-[0.2em] hover:text-purple-400 transition">Galería</a>
+                <a href="{% url 'booking' %}" class="mobile-link text-xl font-black tracking-[0.2em] text-purple-400 hover:text-white transition">Booking</a>
             </div>
-        </button>
+        </div>
     </nav>
 
 
@@ -78,6 +86,29 @@
             {% else %}
                 <p class="text-zinc-500 italic">No hay información de biografía registrada en el panel aún.</p>
             {% endif %}
+        </div>
+    </section>
+
+    <section id="featured-music" class="py-16 bg-zinc-950 border-t border-zinc-900">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-zinc-900/20 border border-zinc-900 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-1/2">
+                    <span class="text-[10px] font-black tracking-widest text-purple-400 uppercase">Último Lanzamiento</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight uppercase mt-1 mb-4">Escucha lo nuevo</h2>
+                    <p class="text-zinc-400 text-xs leading-relaxed">Disfruta del videoclip oficial más reciente. Siente el ritmo del caribe directamente en alta definición.</p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="aspect-video w-full rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
+    <iframe class="w-full h-full" 
+            src="https://www.youtube.com/embed/nS4l8_7D3g4" 
+            title="Alan Wittels Video" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+    </iframe>
+</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -256,8 +287,16 @@
         </div>
     </section>
 
-    <footer class="border-t border-zinc-900 py-8 text-center text-xs text-zinc-600">
-        <p>&copy; 2026 Alan Wittels. </p>
+    <footer class="py-12 border-t border-zinc-900 text-center bg-zinc-950 mt-12">
+        <div class="flex justify-center gap-6 mb-4 text-zinc-500 text-lg">
+            <a href="https://instagram.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-tiktok"></i></a>
+            <a href="https://spotify.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-spotify"></i></a>
+            <a href="https://youtube.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="text-zinc-600 text-[10px] tracking-[0.3em] uppercase font-bold">
+            &copy; 2026 Alan Wittels | Todos los derechos reservados
+        </p>
     </footer>
 
 <script>
@@ -319,6 +358,37 @@ audioControl.addEventListener('click', () => {
 bgAudio.onplay = () => audioControl.classList.add('playing');
 bgAudio.onpause = () => audioControl.classList.remove('playing');
 </script>
+
+<!-- Menú Mobile -->
+<script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        // Función para alternar el menú
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            
+            // Animación/Cambio del icono de tres líneas a una "X" cuando abre
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            } else {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Cerrar el menú automáticamente cuando se da clic en un enlace (importante para los enlaces con '#' como Booking)
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

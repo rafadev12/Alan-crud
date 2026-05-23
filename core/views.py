@@ -1,6 +1,30 @@
 from django.shortcuts import render, redirect
 from .models import Biografia, Album, Concierto, Producto, Galeria, Contratacion
 
+def booking(request):
+    msg_exito = False
+    if request.method == "POST":
+        nombre = request.POST.get('nombre')
+        empresa = request.POST.get('empresa')
+        correo = request.POST.get('correo')
+        telefono = request.POST.get('telefono')
+        mensaje = request.POST.get('mensaje')
+        
+        if nombre and correo and mensaje:
+            Contratacion.objects.create(
+                nombre_contacto=nombre,
+                empresa_marca=empresa,
+                correo=correo,
+                telefono=telefono,
+                mensaje=mensaje
+            )
+            msg_exito = True
+
+    return render(request, 'core/booking.html', {'msg_exito': msg_exito})
+
+def index_preloader(request):
+    return render(request, 'core/preloader.html')
+
 def home(request):
     # Procesar formulario de contratación si viene por POST
     msg_exito = False

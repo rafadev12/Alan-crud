@@ -4,80 +4,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alan Wittels - Tour Oficial</title>
+    <title>Alan Wittels - Gira Oficial 2026</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-zinc-950 text-white font-sans antialiased">
+<body id="site-body" class="bg-zinc-950 text-white font-sans antialiased select-none">
 
-    <nav class="fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="{% url 'home' %}" class="text-xl font-black tracking-widest uppercase">A L A N  W I T T E L S</a>
-            <div class="space-x-6 text-sm font-medium tracking-wide uppercase">
-                <a href="{% url 'home' %}" class="hover:text-purple-400 transition">Inicio</a>
-                <a href="{% url 'discografia' %}" class="text-purple-400 font-bold">Discografía</a>
-                <a href="{% url 'tours' %}" class="text-purple-400 font-bold">Tours</a>
+<nav class="fixed w-full top-0 left-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-900">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between relative z-50">
+            <a href="{% url 'home' %}" class="text-sm font-black tracking-[0.2em] uppercase text-white">
+                ALAN WITTELS
+            </a>
+
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none p-2" aria-label="Abrir menú">
+                <svg id="menu-icon" class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <div class="hidden md:flex space-x-8 text-xs font-semibold tracking-widest uppercase">
+                <a href="{% url 'discografia' %}" class="hover:text-purple-400 transition duration-300">Discografía</a>
+                <a href="{% url 'tours' %}" class="hover:text-purple-400 transition duration-300">Tours</a>
+                <a href="{% url 'galeria' %}" class="hover:text-purple-400 transition duration-300">Galería</a>
+                <a href="{% url 'booking' %}" class="hover:text-purple-400 transition duration-300 text-purple-400">Booking</a>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-screen bg-zinc-950/98 z-40 flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center justify-center space-y-10 w-full uppercase">
+                <a href="{% url 'discografia' %}" class="mobile-link text-lg font-bold tracking-[0.2em] hover:text-purple-400 transition">Discografía</a>
+                <a href="{% url 'tours' %}" class="mobile-link text-lg font-bold tracking-[0.2em] hover:text-purple-400 transition">Tours</a>
+                <a href="{% url 'galeria' %}" class="mobile-link text-lg font-bold tracking-[0.2em] hover:text-purple-400 transition">Galería</a>
+                <a href="{% url 'booking' %}" class="mobile-link text-xl font-black tracking-[0.2em] text-purple-400 hover:text-white transition">Booking</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-32 min-h-screen pb-24">
-        <div class="max-w-5xl mx-auto px-4">
-            
-            <div class="mb-12 border-b border-zinc-800 pb-6 text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-black tracking-tighter uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
-                    Próximas Fechas
-                </h1>
-                <p class="text-purple-500 tracking-widest uppercase text-sm mt-2 font-medium">Alan Wittels On Tour 2026</p>
-            </div>
+    <header class="pt-32 pb-16 bg-gradient-to-b from-purple-950/20 via-zinc-950 to-zinc-950 text-center border-b border-zinc-900">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="text-xs font-black tracking-[0.4em] uppercase text-purple-500 bg-purple-500/10 px-4 py-1.5 rounded-full border border-purple-500/20">
+                Boletos ya a la venta
+            </span>
+            <h1 class="text-5xl md:text-8xl font-black tracking-tighter uppercase mt-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-500">
+                Live Tour 2026
+            </h1>
+            <p class="text-zinc-400 text-sm md:text-base max-w-xl mx-auto mt-4 leading-relaxed">
+                Siente la energía del caribe en vivo. Asegura tu lugar en los festivales y venues más importantes de la temporada.
+            </p>
+        </div>
+    </header>
 
-            <div class="space-y-4">
-                {% for concierto in conciertos %}
-                <div class="flex flex-col md:flex-row md:items-center justify-between p-6 bg-zinc-900/40 rounded-xl border border-zinc-800 hover:border-purple-500/40 transition-all duration-300 gap-4 group">
-                    
-                    <div class="flex items-center gap-4">
-                        <div class="bg-purple-600/10 text-purple-400 font-black text-xl px-4 py-2 rounded-lg border border-purple-500/20 text-center min-w-[100px]">
-                            {{ concierto.fecha|date:"d M" }}
-                            <span class="block text-xs font-medium text-zinc-500 uppercase mt-0.5">{{ concierto.fecha|date:"Y" }}</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">
-                                {{ concierto.nombre_gira }}
-                            </h3>
-                            <p class="text-sm text-zinc-400">{{ concierto.lugar }}</p>
-                        </div>
+    <main class="py-20 max-w-5xl mx-auto px-4">
+        <div class="space-y-4">
+            {% for concierto in conciertos %}
+            <div class="group bg-zinc-900/30 border border-zinc-900 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-purple-500/30 shadow-xl">
+                
+                <div class="flex items-center gap-4 w-full md:w-auto">
+                    <div class="bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-center min-w-[70px] group-hover:border-purple-500/40 transition duration-300">
+                        <span class="block text-xl font-black text-white uppercase leading-none">{{ concierto.fecha|date:"d" }}</span>
+                        <span class="block text-[10px] font-bold text-purple-400 uppercase tracking-widest mt-1">{{ concierto.fecha|date:"M" }}</span>
                     </div>
-
-                    <div class="text-zinc-300 font-medium md:text-right">
-                        {{ concierto.ciudad }}
-                    </div>
-
                     <div>
-                        {% if concierto.enlace_tickets %}
-                        <a href="{{ concierto.enlace_tickets }}" target="_blank" 
-                           class="inline-block w-full md:w-auto text-center bg-white text-black font-semibold px-6 py-2.5 rounded-full hover:bg-purple-500 hover:text-white transition-all duration-300 text-sm tracking-wide shadow-lg">
-                            Comprar Tickets
-                        </a>
-                        {% else %}
-                        <span class="inline-block w-full md:w-auto text-center bg-zinc-800 text-zinc-500 font-medium px-6 py-2.5 rounded-full text-sm tracking-wide cursor-not-allowed">
-                            Agotado
-                        </span>
-                        {% endif %}
+                        <span class="text-[10px] font-black uppercase tracking-widest text-zinc-500 block mb-0.5">{{ concierto.nombre_gira }}</span>
+                        <h2 class="text-xl font-bold tracking-wide group-hover:text-purple-400 transition duration-300">{{ concierto.ciudad }}</h2>
                     </div>
+                </div>
 
+                <div class="w-full md:w-auto text-left md:text-center flex items-center gap-2 text-zinc-400">
+                    <i class="fas fa-location-dot text-purple-500/70 text-sm"></i>
+                    <span class="text-sm font-medium uppercase tracking-wider">{{ concierto.lugar }}</span>
                 </div>
-                {% empty %}
-                <div class="text-center py-16 bg-zinc-900/20 rounded-xl border border-zinc-900/60">
-                    <p class="text-zinc-500 italic">No hay fechas programadas por el momento. Quédate atento a las redes.</p>
+
+                <div class="w-full md:w-auto flex items-center justify-between md:justify-end gap-6 border-t border-zinc-900 pt-4 md:pt-0 md:border-none">
+                    
+                    {% if forloop.first %}
+                        <span class="text-[9px] font-extrabold tracking-widest uppercase bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2.5 py-1 rounded">
+                            ¡Últimos Tickets!
+                        </span>
+                    {% else %}
+                        <span class="text-[9px] font-extrabold tracking-widest uppercase bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-2.5 py-1 rounded">
+                            Disponibles
+                        </span>
+                    {% endif %}
+
+                    {% if concierto.enlace_tickets %}
+                    <a href="{{ concierto.enlace_tickets }}" target="_blank" 
+                       class="bg-white text-black hover:bg-purple-600 hover:text-white font-bold uppercase tracking-widest text-xs px-6 py-3 rounded-xl transition-all duration-300 shadow-md transform active:scale-95 flex items-center gap-2">
+                        Tickets <i class="fas fa-ticket text-[10px]"></i>
+                    </a>
+                    {% else %}
+                    <button disabled class="bg-zinc-800 text-zinc-500 font-bold uppercase tracking-widest text-xs px-6 py-3 rounded-xl cursor-not-allowed">
+                        Próximamente
+                    </button>
+                    {% endif %}
                 </div>
-                {% endfor %}
+
             </div>
-
+            {% empty %}
+            <div class="text-center py-24 bg-zinc-900/10 rounded-3xl border-2 border-dashed border-zinc-900">
+                <i class="fas fa-calendar-alt text-zinc-800 text-5xl mb-4"></i>
+                <p class="text-zinc-600 font-medium italic">Anunciando nuevas fechas de la gira muy pronto.</p>
+            </div>
+            {% endfor %}
         </div>
     </main>
 
-    <footer class="border-t border-zinc-900 py-8 text-center text-xs text-zinc-600">
-        <p>&copy; 2026 Alan Wittels. </p>
+    <section class="py-20 bg-zinc-950 border-t border-zinc-900">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-4xl font-extrabold uppercase tracking-tight">Información del <span class="text-purple-500">Tour</span></h2>
+                <p class="text-zinc-500 text-xs uppercase tracking-widest mt-2">Todo lo que necesitas saber antes del show</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-zinc-900/20 border border-zinc-900 p-6 rounded-2xl">
+                    <h3 class="text-base font-bold text-white mb-2 uppercase tracking-wide">¿A qué hora abren las puertas los eventos?</h3>
+                    <p class="text-zinc-400 text-xs leading-relaxed">Generalmente los accesos inician 2 horas antes de la hora marcada en tu boleto. Te recomendamos llegar temprano para evitar filas en los filtros de seguridad.</p>
+                </div>
+
+                <div class="bg-zinc-900/20 border border-zinc-900 p-6 rounded-2xl">
+                    <h3 class="text-base font-bold text-white mb-2 uppercase tracking-wide">¿Hay restricciones de edad?</h3>
+                    <p class="text-zinc-400 text-xs leading-relaxed">Cada recinto y país maneja sus propias políticas de edad legal. Te sugerimos revisar las especificaciones directamente en el portal de la ticketera oficial de tu ciudad.</p>
+                </div>
+
+                <div class="bg-zinc-900/20 border border-zinc-900 p-6 rounded-2xl">
+                    <h3 class="text-base font-bold text-white mb-2 uppercase tracking-wide">¿Cómo adquiero pases Meet & Greet?</h3>
+                    <p class="text-zinc-400 text-xs leading-relaxed">Los accesos VIP exclusivos para conocer a Alan se anuncian únicamente a través del club de fans oficial y mediante dinámicas especiales en redes sociales autorizadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-zinc-900 text-center bg-zinc-950 mt-12">
+        <div class="flex justify-center gap-6 mb-4 text-zinc-500 text-lg">
+            <a href="https://instagram.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-tiktok"></i></a>
+            <a href="https://spotify.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-spotify"></i></a>
+            <a href="https://youtube.com/" target="_blank" class="hover:text-purple-400 transition"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="text-zinc-600 text-[10px] tracking-[0.3em] uppercase font-bold">
+            &copy; 2026 Alan Wittels | Todos los derechos reservados
+        </p>
     </footer>
 
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            } else {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) toggleMenu();
+            });
+        });
+    </script>
 </body>
 </html>
