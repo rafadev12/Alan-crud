@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <audio id="bg-audio" loop src="{% static 'audios/Alan Wittels - Mantra(m4a_128k).m4a' %}"></audio>
+        <audio id="bg-audio" loop src="{% static '\audios\alanwittel-mantra.m4a' %}"></audio>
         
             <!-- Botón de Control de Audio Flotante -->
         <button id="audio-control" class="fixed bottom-8 right-8 z-[110] flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-full hover:bg-white/20 transition-all duration-300 group">
@@ -142,8 +142,7 @@
                     <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight uppercase">Galería <span class="text-yellow-500"></span></h2>
                     <p class="text-zinc-500 uppercase tracking-widest text-xs mt-2">Momentos & Clips Exclusivos</p>
                 </div>
-                <a href="{% url 'galeria' %}" class="text-sm font-bold text-yellow-400 hover:text-white transition uppercase tracking-widest">Ver Completa →</a>
-            </div>
+               </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {% for item in items_galeria %}
