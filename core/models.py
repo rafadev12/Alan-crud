@@ -1,5 +1,21 @@
 from django.db import models
 
+class Contratacion(models.Model):
+    nombre_contacto = models.CharField(max_length=200, verbose_name="Nombre del Solicitante")
+    empresa_marca = models.CharField(max_length=200, blank=True, null=True, verbose_name="Empresa o Marca")
+    correo = models.EmailField(verbose_name="Correo Electrónico")
+    telefono = models.CharField(max_length=50, blank=True, null=True, verbose_name="Teléfono de Contacto")
+    mensaje = models.TextField(verbose_name="Propuesta o Detalles del Evento")
+    fecha_envio = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Envío")
+
+    class Meta:
+        verbose_name = "Contratación"
+        verbose_name_plural = "Contrataciones"
+        ordering = ['-fecha_envio']
+
+    def __str__(self):
+        return f"Propuesta de {self.nombre_contacto} - {self.empresa_marca or 'Particular'}"
+
 # REVISA ESTA CLASE: Asegúrate de que se llame exactamente Concierto
 class Concierto(models.Model):
     ciudad = models.CharField(max_length=100)
@@ -59,3 +75,20 @@ class Biografia(models.Model):
 
     def __str__(self):
         return "Biografía de Alan Wittels"
+    
+class Galeria(models.Model):
+    TIPO_CHOICES = [
+        ('foto', 'Foto'),
+        ('video', 'Video'),
+    ]
+    titulo = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES, default='foto')
+    imagen = models.ImageField(upload_to='galeria/', blank=True, null=True)
+    url_video = models.URLField(blank=True, null=True)
+    fecha_subida = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-fecha_subida']
+
+    def __str__(self):
+        return f"{self.titulo} ({self.get_tipo_display()})"

@@ -1,6 +1,10 @@
 from django.contrib import admin
 # CAMBIA 'Conciertos' por 'Concierto' en la línea de abajo:
-from .models import Concierto, Album, Cancion, Producto, Biografia
+from .models import Galeria, Concierto, Album, Cancion, Producto, Biografia, Contratacion
+
+admin.site.register(Contratacion)
+
+admin.site.register(Galeria)
 
 # 1. Configuración para los Conciertos
 @admin.register(Concierto) # Asegúrate de que aquí también esté en singular
