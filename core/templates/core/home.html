@@ -8,12 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-yellow-600 selection:text-white">
 
 <nav class="fixed w-full top-0 left-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-900">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between relative z-50">
-            <a href="{% url 'home' %}" class="text-sm font-black tracking-[0.2em] uppercase text-white">
+            <a  href="{% url 'home' %}" class="text-sm font-black tracking-[0.2em] uppercase text-white">
                 ALAN WITTELS
             </a>
 
@@ -80,7 +81,7 @@
                 {% if biografia.imagen_perfil %}
                     <div class="relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                        <img src="{{ biografia.imagen_perfil.url }}" alt="Alan Wittels" class="relative rounded-lg object-cover w-full h-96 filter grayscale contrast-125">
+                        <img data-aos="fade-up" src="{{ biografia.imagen_perfil.url }}" alt="Alan Wittels" class="relative rounded-lg object-cover w-full h-96 filter grayscale contrast-125">
                     </div>
                 {% endif %}
             {% else %}
@@ -89,7 +90,7 @@
         </div>
     </section>
 
-    <section id="featured-music" class="py-16 bg-zinc-950 border-t border-zinc-900">
+    <!-- <section id="featured-music" class="py-16 bg-zinc-950 border-t border-zinc-900">
         <div class="max-w-4xl mx-auto px-4">
             <div class="bg-zinc-900/20 border border-zinc-900 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8">
                 <div class="w-full md:w-1/2">
@@ -99,23 +100,50 @@
                 </div>
                 <div class="w-full md:w-1/2">
                     <div class="aspect-video w-full rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
-    <iframe class="w-full h-full" 
-            src="https://www.youtube.com/embed/nS4l8_7D3g4" 
-            title="Alan Wittels Video" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-    </iframe>
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/https://youtu.be/SMmX2yhhSso?si=exQFjROpamTBeege" frameborder="0" allowfullscreen></iframe>
 </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+
+    <div class="bg-zinc-950 py-8 border-y border-zinc-900">
+    <div class="max-w-6xl mx-auto px-4">
+        <p class="text-center text-xs tracking-widest text-zinc-500 uppercase mb-6 font-semibold">
+            Disponible en plataformas digitales
+        </p>
+        
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-60">
+            
+            <a href="https://open.spotify.com/intl-es/artist/5JZYv0z6YzsztblsEpst8g?si=Myb4z7ajSf-DGUdkjO4i0A" target="_blank" rel="noopener noreferrer"
+               class="h-7 md:h-8 text-white hover:text-[#1DB954] hover:scale-105 transition-all duration-300 ease-in-out">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify" class="h-full invert opacity-80 hover:opacity-100">
+            </a>
+
+            <a href="https://music.apple.com/us/artist/alan-wittels/1178264662" target="_blank" rel="noopener noreferrer"
+               class="h-7 md:h-8 text-white hover:scale-105 transition-all duration-300 ease-in-out">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Apple_Music_logo.svg" alt="Apple Music" class="h-full invert opacity-80 hover:opacity-100">
+            </a>
+
+            <a href="https://music.amazon.es/artists/B00PB5KS38/alan-wittels?marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&ref=dm_sh_n2SzEeAHsfyVwI9CoZW5T7Gjs" target="_blank" rel="noopener noreferrer"
+               class="h-7 md:h-8 text-white hover:scale-105 transition-all duration-300 ease-in-out">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Amazon_Music_logo.svg/1920px-Amazon_Music_logo.svg.png?_=20211224163912" alt="Amazon Music" class="h-full invert opacity-80 hover:opacity-100">
+            </a>
+
+            <a href="https://www.youtube.com/@wittelsalan" target="_blank" rel="noopener noreferrer"
+               class="h-7 md:h-8 text-white hover:text-[#FF0000] hover:scale-105 transition-all duration-300 ease-in-out">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube" class="h-full invert opacity-80 hover:opacity-100">
+            </a>
+
+        </div>
+    </div>
+</div>
+    
 
     <section id="discografia" class="py-24 bg-zinc-900/50 border-y border-zinc-900 scroll-mt-16">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-3xl font-extrabold tracking-tight mb-12 uppercase border-b border-zinc-800 pb-4">Discografía</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div data-aos="fade-up" class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {% for album in albumes %}
                     <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800/50 hover:border-yellow-500/50 transition group flex flex-col justify-between">
                         <div>
@@ -146,7 +174,7 @@
 
     <section id="tours" class="py-24 max-w-4xl mx-auto px-4 scroll-mt-16">
         <h2 class="text-3xl font-extrabold tracking-tight mb-12 uppercase border-b border-zinc-800 pb-4">Tours & Próximas Fechas</h2>
-        <div class="space-y-4">
+        <div data-aos="fade-up" class="space-y-4">
             {% for concierto in conciertos %}
                 <div class="bg-zinc-900 border border-zinc-800/80 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 hover:bg-zinc-900/80 transition">
                     <div>
@@ -175,7 +203,7 @@
                 </div>
                </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div data-aos="fade-up" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {% for item in items_galeria %}
                 <div class="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800/50 aspect-square">
                     {% if item.tipo == 'foto' %}
@@ -194,10 +222,10 @@
         </div>
     </section>
 
-    <section id="merch" class="py-24 bg-zinc-900/30 border-t border-zinc-900 scroll-mt-16">
+    <section  id="merch" class="py-24 bg-zinc-900/30 border-t border-zinc-900 scroll-mt-16">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-3xl font-extrabold tracking-tight mb-12 uppercase border-b border-zinc-800 pb-4">Merch Oficial</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div data-aos="fade-up" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {% for producto in productos %}
                     <div class="bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800/60 flex flex-col justify-between">
                         <div>
@@ -229,7 +257,7 @@
 
     <section id="booking" class="py-24 bg-zinc-950 border-t border-zinc-900 scroll-mt-16">
         <div class="max-w-3xl mx-auto px-4">
-            
+            <div data-aos="fade-up" class="text-center mb-12"></div>
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight uppercase">
                     Booking & <span class="text-yellow-500">Contrataciones</span>
@@ -389,6 +417,11 @@ bgAudio.onpause = () => audioControl.classList.remove('playing');
             });
         });
     </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+</script>
 
 </body>
 </html>
