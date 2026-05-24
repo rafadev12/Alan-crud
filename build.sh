@@ -13,7 +13,11 @@ echo "=== APLICANDO MIGRACIONES ==="
 python manage.py migrate
 
 echo "=== CREANDO SUPERUSUARIO ENCRIPTADO ==="
+# Exportamos la ruta de configuración para que Python no se confunda
+export DJANGO_SETTINGS_MODULE=alan_wittels_web.settings
+
 python -c "
+import os
 import django
 django.setup()
 from django.contrib.auth import get_user_model
